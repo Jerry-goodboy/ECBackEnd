@@ -25,16 +25,19 @@ function verifyImage($type=1,$length=4,$pixel=0,$line=0,$sess_name="verify"){
 		$text=substr($chars, $i,1);
 		imagettftext($image, $size, $angle, $x, $y, $color, $fontfile, $text);
 	}
-	if($pixel)
-		for($i=0;$i<$pixel;$i++)
+	if($pixel){
+		for($i=0;$i<$pixel;$i++){
 			imagesetpixel($image, mt_rand(0,$width-1), mt_rand(0,$height-1), $black);
-		if($line)
-			for($i=1;$i<$line;$i++){
-				$color=imagecolorallocate($image,mt_rand(50,90), mt_rand(80,200), mt_rand(90,180));
-				imageline($image, mt_rand(0,$width-1), mt_rand(0,$height-1), mt_rand(0,$width-1), mt_rand(0,$height-1), $color);
-			}
-		header("content-type:image/gif");
-		imagegif($image);
-		imagedestroy(($image));
+		}
+	}
+	if($line){
+		for($i=1;$i<$line;$i++){
+			$color=imagecolorallocate($image,mt_rand(50,90), mt_rand(80,200), mt_rand(90,180));
+			imageline($image, mt_rand(0,$width-1), mt_rand(0,$height-1), mt_rand(0,$width-1), mt_rand(0,$height-1), $color);
+		}
+	}
+	header("content-type:image/gif");
+	imagegif($image);
+	imagedestroy(($image));
 }
 // verifyImage(2,15,10,6,'verify');
